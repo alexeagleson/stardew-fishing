@@ -1,10 +1,10 @@
 :root {
   --width: 25vh;
-  --height: 95vh;
+  --height: 90vh;
 }
 
 .fishing {
-  margin: 2vh 10vh;
+  margin: 3vh 10vh;
   width: var(--width);
   height: var(--height);
   background-color: #f9f3e8;
@@ -40,7 +40,7 @@
   width: 60%;
   background-color: #7a7a7a;
   border: 2px solid #4d4842;
-  height: 10%;
+  height: 10vh;
   box-sizing: border-box;
   border-radius: 5%;
 }
@@ -52,9 +52,8 @@
   border-radius: 50%;
   background-color: #9d610c;
   border: 2px solid #723f1a;
-  flex: 2;
   position: absolute;
-  top: 73%;
+  top: 70vh;
 }
 
 .fishing__rod__reel__handle {
@@ -88,7 +87,7 @@
 .fishing__rod__handle {
   width: 100%;
   background-color: #723f1a;
-  flex: 5;
+  height: 20vh;
 }
 
 /* Next thing */

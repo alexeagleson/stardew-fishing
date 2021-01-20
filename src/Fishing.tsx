@@ -117,7 +117,7 @@ export const Fishing = () => {
   return (
     <div className="fishing">
       <div className="fishing__rod">
-        {[...new Array(8)].map(() => (
+        {[...new Array(7)].map(() => (
           <div className="fishing__rod__rod" />
         ))}
         <div className="fishing__rod__reel">
