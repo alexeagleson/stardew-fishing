@@ -1,0 +1,37 @@
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+
+  // Sets prettier to auto-format all files of this type
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Associates the following files to JSONC (JSON with comments) so prettier will format them
+  "files.associations": {
+    ".eslintrc": "jsonc",
+    ".prettierrc": "jsonc",
+    ".stylelintrc": "jsonc"
+  },
+
+  // For applying all the rules automatically whenever you save.
+  // It will use Prettier to format, which in turn will pull additional formatting rules from ESLint
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  //   "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+    // "source.fixAll.stylelint": true
+  }
+}

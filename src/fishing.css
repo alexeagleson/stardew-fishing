@@ -1,0 +1,167 @@
+:root {
+  --width: 25vh;
+  --height: 95vh;
+}
+
+.fishing {
+  margin: 2vh 10vh;
+  width: var(--width);
+  height: var(--height);
+  background-color: #f9f3e8;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.fishing * {
+  border-radius: 8px;
+}
+
+.fishing__rod {
+  flex: 1;
+  margin-right: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+@keyframes reel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fishing__rod__rod {
+  width: 60%;
+  background-color: #7a7a7a;
+  border: 2px solid #4d4842;
+  height: 10%;
+  box-sizing: border-box;
+  border-radius: 5%;
+}
+
+.fishing__rod__reel {
+  z-index: 1;
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  background-color: #9d610c;
+  border: 2px solid #723f1a;
+  flex: 2;
+  position: absolute;
+  top: 73%;
+}
+
+.fishing__rod__reel__handle {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 100%;
+  height: 20%;
+  background-color: #7f756d;
+  border: 2px solid #4d4842;
+
+  transform-origin: left;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.animate-class {
+  animation-name: reel-spin;
+  animation-duration: 0.35s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.fishing__rod__reel__handle__nub {
+  height: 100%;
+  width: 25%;
+  background-color: #ad4d06;
+}
+
+.fishing__rod__handle {
+  width: 100%;
+  background-color: #723f1a;
+  flex: 5;
+}
+
+/* Next thing */
+
+.fishing__bar {
+  flex: 3;
+  background-color: #e8ae4e;
+  display: flex;
+  padding: 4%;
+}
+
+.fishing__bar .fishing__bar__interior {
+  background-image: linear-gradient(#b1d0f3, #4775c5);
+  flex: 1;
+  position: relative;
+}
+
+.fishing__bar .fishing__bar__interior .fishing__bar__interior__rectangle {
+  position: absolute;
+  width: 100%;
+  height: 25%;
+  background-color: #82e500;
+  box-sizing: border-box;
+  border: 2px solid #216501;
+}
+
+.fishing__bar .fishing__bar__interior .fishing__bar__interior__fish {
+  position: absolute;
+  height: 8%;
+  width: 84%;
+  margin-left: 8%;
+  transform: rotate(40deg);
+  top: 0%;
+  stroke: black;
+  stroke-width: 8;
+  fill: #19ab78;
+}
+
+.fishing__progress {
+  flex: 2;
+  background-color: #b8783b;
+  display: flex;
+  padding: 4%;
+  border: 2px solid #64341f;
+}
+
+.fishing__progress__interior {
+  flex: 2;
+  background-image: linear-gradient(to right, #b8783b, #64341f);
+  border: 2px solid #64341f;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.fishing__progress__interior__progress {
+  width: 100%;
+  height: 20%;
+  background-color: green;
+}
+
+.catches {
+  height: 100%;
+  flex: 2;
+  background-color: transparent;
+}
+
+.catches .fish {
+  height: 8%;
+  width: 84%;
+  transform: rotate(40deg);
+  stroke: black;
+  stroke-width: 8;
+  fill: #19ab78;
+}
