@@ -39,7 +39,7 @@ const updateProgress = (
     } else if (externalProgress < 400) {
       progressBar.style.backgroundColor = 'orange';
     } else {
-      progressBar.style.backgroundColor = 'green';
+      progressBar.style.backgroundColor = '#5bff00';
     }
   }
   return externalLevel;
@@ -91,7 +91,7 @@ export const Fishing = () => {
 
     const anim = requestAnimationFrame(moveStuff);
 
-    window.addEventListener('mousedown', () => {
+    const touchDown = () => {
       down = false;
 
       if (!animationActive) {
@@ -102,11 +102,16 @@ export const Fishing = () => {
           animationActive = false;
         }, 350);
       }
-    });
+    };
 
-    window.addEventListener('mouseup', () => {
+    const touchUp = () => {
       down = true;
-    });
+    };
+
+    window.addEventListener('touchstart', touchDown);
+    window.addEventListener('touchend', touchUp);
+    window.addEventListener('mousedown', touchDown);
+    window.addEventListener('mouseup', touchUp);
 
     return () => {
       cancelAnimationFrame(anim);
