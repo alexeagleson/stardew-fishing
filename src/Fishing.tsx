@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ReactComponent as Fish } from './fish.svg';
+import { ReactComponent as Seaweed } from './seaweed.svg';
 import './fishing.css';
 
 let fishSpeed = 0.25;
@@ -54,7 +55,7 @@ export const Fishing = () => {
   const [fishPosition, setFishPosition] = useState(0);
   const [animate, setAnimate] = useState('');
   const [progress, setProgress] = useState(0);
-  const [level, setLevel] = useState(2);
+  const [level, setLevel] = useState(0);
 
   const fish = useRef<SVGSVGElement>(null);
   const greenBar = useRef<HTMLDivElement>(null);
@@ -134,6 +135,8 @@ export const Fishing = () => {
       </div>
       <div className="fishing__bar">
         <div className="fishing__bar__interior">
+          <Seaweed className="seaweed" />
+          <div className="dirt" />
           <div
             ref={greenBar}
             className="fishing__bar__interior__rectangle"

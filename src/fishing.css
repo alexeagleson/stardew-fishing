@@ -3,6 +3,10 @@
   --height: 90vh;
 }
 
+html {
+  background-color: #f9f3e8;
+}
+
 .fishing {
   margin: 3vh 10vh;
   width: var(--width);
@@ -105,6 +109,27 @@
   position: relative;
 }
 
+.seaweed {
+  /* z-index: 1; */
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  opacity: 0.6;
+}
+
+.dirt {
+  background-image: linear-gradient(to right, #b8783b, #64341f);
+  position: absolute;
+  width: 100%;
+  height: 1%;
+  bottom: 0;
+  opacity: 0.9;
+  /* border-radius: 50%;
+  transform: translateY(1vh);
+  overflow: hidden; */
+}
+
 .fishing__bar .fishing__bar__interior .fishing__bar__interior__rectangle {
   position: absolute;
   width: 100%;
@@ -124,6 +149,7 @@
   stroke: black;
   stroke-width: 8;
   fill: #19ab78;
+  opacity: 0.8;
 }
 
 .fishing__progress {
