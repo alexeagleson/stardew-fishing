@@ -136,6 +136,16 @@ export const Fishing = () => {
       <div className="fishing__bar">
         <div className="fishing__bar__interior">
           <Seaweed className="seaweed" />
+          <div className="bubble animate-bubble" />
+          <div
+            className="bubble animate-bubble"
+            style={{ left: '55%', bottom: '10%', animationDuration: '7s' }}
+          />
+          <div
+            className="bubble animate-bubble"
+            style={{ left: '70%', bottom: '7%', animationDuration: '9s' }}
+          />
+
           <div className="dirt" />
           <div
             ref={greenBar}

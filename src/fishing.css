@@ -31,6 +31,27 @@ html {
   align-items: flex-end;
 }
 
+@keyframes move-bubble {
+  0% {
+    transform: translateY(0vh);
+  }
+  20% {
+    transform: translate(-0.5vh, -1vh);
+  }
+  40% {
+    transform: translate(0.5vh, -3.5vh);
+  }
+  60% {
+    transform: translate(-0.5vh, -5vh);
+  }
+  80% {
+    transform: translate(0.5vh, -6.5vh);
+  }
+  100% {
+    transform: translate(-0.5vh, -8vh);
+  }
+}
+
 @keyframes reel-spin {
   from {
     transform: rotate(0deg);
@@ -38,6 +59,24 @@ html {
   to {
     transform: rotate(360deg);
   }
+}
+
+.bubble {
+  position: absolute;
+  bottom: 5%;
+  left: 25%;
+  width: 0.5vh;
+  height: 0.5vh;
+  background-color: transparent;
+  border: 1px solid white;
+  opacity: 0.5;
+}
+
+.animate-bubble {
+  animation-name: move-bubble;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 .fishing__rod__rod {
