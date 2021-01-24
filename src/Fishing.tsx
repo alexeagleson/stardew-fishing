@@ -78,7 +78,7 @@ export const Fishing = () => {
   const fishOn = useRef<HTMLAudioElement>(null);
   const youGotIt = useRef<HTMLAudioElement>(null);
 
-  const toggleAudio = useRef<HTMLDivElement>(null);
+  // const toggleAudio = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const moveStuff = () => {
