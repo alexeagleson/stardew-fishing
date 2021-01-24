@@ -229,3 +229,49 @@ html {
   stroke-width: 8;
   fill: #19ab78;
 }
+
+@keyframes toggle-audio-on {
+  from {
+    transform: translateX(0vh);
+  }
+  to {
+    transform: translateX(2vh);
+  }
+}
+
+@keyframes toggle-audio-off {
+  from {
+    transform: translateX(2vh);
+  }
+  to {
+    transform: translateX(0vh);
+  }
+}
+
+.animate-toggle-on {
+  animation-name: toggle-audio-on;
+  animation-duration: 0.1s;
+  /* animation-iteration-count: 1; */
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.animate-toggle-off {
+  animation-name: toggle-audio-off;
+  animation-duration: 0.1s;
+  /* animation-iteration-count: 1; */
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.audio-toggle {
+  width: 4vh;
+  height: 2vh;
+  background-color: green;
+}
+
+.audio-toggle__nub {
+  width: 2vh;
+  height: 2vh;
+  background-color: red;
+}

@@ -9,27 +9,40 @@ let down = true;
 let externalProgress = 0;
 let externalLevel = 0;
 let animationActive = false;
+let justCaught = false;
 
 const updateProgress = (
   fish: SVGSVGElement | null,
   greenBar: HTMLDivElement | null,
-  progressBar: HTMLDivElement | null
+  progressBar: HTMLDivElement | null,
+  fishOn: HTMLAudioElement | null,
+  youGotIt: HTMLAudioElement | null
 ) => {
   if (fish && greenBar && progressBar) {
     const fishTop = parseInt(fish.style.top.replace('%', ''));
     const greenBarTop = parseInt(greenBar.style.top.replace('%', ''));
     const inRange = fishTop >= greenBarTop && fishTop + 8 <= greenBarTop + 25;
+    const inWideRange = fishTop >= greenBarTop - 10 && fishTop + 8 <= greenBarTop + 35;
 
     if (inRange) {
+      if (justCaught === false) {
+        justCaught = true;
+        fishOn?.play();
+      }
       externalProgress += 5;
     } else {
       externalProgress -= 5;
+    }
+
+    if (!inWideRange) {
+      justCaught = false;
     }
 
     if (externalProgress > 1000) {
       externalLevel += 1;
       fishSpeed += 0.25;
       externalProgress = 0;
+      youGotIt?.play();
     }
 
     externalProgress =
@@ -61,12 +74,20 @@ export const Fishing = () => {
   const greenBar = useRef<HTMLDivElement>(null);
   const progressBar = useRef<HTMLDivElement>(null);
 
+  const audio = useRef<HTMLAudioElement>(null);
+  const fishOn = useRef<HTMLAudioElement>(null);
+  const youGotIt = useRef<HTMLAudioElement>(null);
+
+  const toggleAudio = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const moveStuff = () => {
       const externalLevel = updateProgress(
         fish.current,
         greenBar.current,
-        progressBar.current
+        progressBar.current,
+        fishOn.current,
+        youGotIt.current
       );
       setLevel(externalLevel);
 
@@ -93,6 +114,7 @@ export const Fishing = () => {
     const anim = requestAnimationFrame(moveStuff);
 
     const touchDown = () => {
+      audio.current?.play();
       down = false;
 
       if (!animationActive) {
@@ -121,58 +143,79 @@ export const Fishing = () => {
   }, []);
 
   return (
-    <div className="fishing">
-      <div className="fishing__rod">
-        {[...new Array(6)].map(() => (
-          <div className="fishing__rod__rod" />
-        ))}
-        <div className="fishing__rod__reel">
-          <div className={`fishing__rod__reel__handle ${animate}`}>
-            <div className="fishing__rod__reel__handle__nub"></div>
+    <>
+      <audio ref={audio} src={'/tune.mp3'} />
+      <audio ref={fishOn} src={'/fish-on.mp3'} />
+      <audio ref={youGotIt} src={'/you-got-it.mp3'} />
+      <div className="fishing">
+        <div className="fishing__rod">
+          {[...new Array(6)].map((_, idx) => (
+            <div key={idx} className="fishing__rod__rod" />
+          ))}
+          <div className="fishing__rod__reel">
+            <div className={`fishing__rod__reel__handle ${animate}`}>
+              <div className="fishing__rod__reel__handle__nub"></div>
+            </div>
+          </div>
+          <div className="fishing__rod__handle"></div>
+        </div>
+        <div className="fishing__bar">
+          <div className="fishing__bar__interior">
+            <Seaweed className="seaweed" />
+            <div className="bubble animate-bubble" />
+            <div
+              className="bubble animate-bubble"
+              style={{ left: '55%', bottom: '10%', animationDuration: '7s' }}
+            />
+            <div
+              className="bubble animate-bubble"
+              style={{ left: '70%', bottom: '7%', animationDuration: '9s' }}
+            />
+
+            <div className="dirt" />
+            <div
+              ref={greenBar}
+              className="fishing__bar__interior__rectangle"
+              style={{ top: `${interiorRectanglePosition}%` }}
+            ></div>
+            <Fish
+              ref={fish}
+              className="fishing__bar__interior__fish"
+              style={{ top: `${fishPosition}%` }}
+            />
           </div>
         </div>
-        <div className="fishing__rod__handle"></div>
-      </div>
-      <div className="fishing__bar">
-        <div className="fishing__bar__interior">
-          <Seaweed className="seaweed" />
-          <div className="bubble animate-bubble" />
-          <div
-            className="bubble animate-bubble"
-            style={{ left: '55%', bottom: '10%', animationDuration: '7s' }}
-          />
-          <div
-            className="bubble animate-bubble"
-            style={{ left: '70%', bottom: '7%', animationDuration: '9s' }}
-          />
-
-          <div className="dirt" />
-          <div
-            ref={greenBar}
-            className="fishing__bar__interior__rectangle"
-            style={{ top: `${interiorRectanglePosition}%` }}
-          ></div>
-          <Fish
-            ref={fish}
-            className="fishing__bar__interior__fish"
-            style={{ top: `${fishPosition}%` }}
-          />
+        <div className="fishing__progress">
+          <div className="fishing__progress__interior">
+            <div
+              ref={progressBar}
+              className="fishing__progress__interior__progress"
+              style={{ height: `${Math.floor(progress / 10)}%` }}
+            ></div>
+          </div>
+        </div>
+        <div className="catches">
+          {[...new Array(level)].map((_, idx) => (
+            <Fish key={idx} className="fish" />
+          ))}
         </div>
       </div>
-      <div className="fishing__progress">
-        <div className="fishing__progress__interior">
-          <div
-            ref={progressBar}
-            className="fishing__progress__interior__progress"
-            style={{ height: `${Math.floor(progress / 10)}%` }}
-          ></div>
-        </div>
-      </div>
-      <div className="catches">
-        {[...new Array(level)].map(() => (
-          <Fish className="fish" />
-        ))}
-      </div>
-    </div>
+      {/* <div
+        className="audio-toggle"
+        onClick={() => {
+          const el = toggleAudio.current;
+          if (el) {
+            const className = el.className;
+            if (className.includes('animate-toggle-on')) {
+              el.className = 'audio-toggle__nub animate-toggle-off';
+            } else {
+              el.className = 'audio-toggle__nub animate-toggle-on';
+            }
+          }
+        }}
+      >
+        <div ref={toggleAudio} className="audio-toggle__nub" />
+      </div> */}
+    </>
   );
 };
